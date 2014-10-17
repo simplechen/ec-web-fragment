@@ -1,0 +1,25 @@
+#override("head")
+	<div class='head'>
+		<h2>菜单</h2>
+		<div class="menu">
+			<ul>
+				<li><a href="/ec-fragment-main/main/index">首页</a></li>
+				<li><a href="/ec-fragment-main/login/index?tpl=parent">登录模块[调用父模块模板]</a></li>
+			</ul>
+		</div>
+	</div>
+#end
+
+#override("body")
+	<div class='content'>
+		皮肤为$theme
+		<h1>
+			模板文件位置:ec-fragment-login:/META-INF/modules/login/index.vm
+		</h1>
+		<h2>注意：因为模板加载的顺序我们有机会可以重写该模板文件; 处理办法 将ec-fragment-main:/velocity/META-INF/modules/login2 改为
+			<strong>/velocity/META-INF/modules/login</strong>
+		</h2>
+	</div> 
+#end
+
+#extends("layout.vm")

@@ -1,0 +1,20 @@
+#override("head")
+	<div class='head'>
+		<h2>模块入口主页</h2>
+		<div class="menu">
+			<ul>
+				<li><a href="index.json">JSON URL</a></li>
+				<li><a href="index.xml">XML URL</a></li>
+			</ul>
+			<ul><li><a href="/ec-fragment-main/login/index">登录模块</a></li></ul>
+		</div>
+	</div>
+#end
+
+#override("body")
+	<div class='content'>
+		皮肤为$theme
+	</div> 
+#end
+
+#extends("layout.vm")

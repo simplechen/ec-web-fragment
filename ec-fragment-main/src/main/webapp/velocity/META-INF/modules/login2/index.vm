@@ -1,0 +1,22 @@
+#override("head")
+	<div class='head'>
+		<h2>菜单</h2>
+		<div class="menu">
+			<ul>
+				<li><a href="/ec-fragment-main/main/index">首页</a></li>
+				<li><a href="/ec-fragment-main/login/index">登录模块[调用子模块自身模板]</a></li>
+			</ul>
+		</div>
+	</div>
+#end
+
+#override("body")
+	<div class='content'>
+		皮肤为$theme
+		<h1>
+			模板文件位置:<b>ec-fragment-main:/velocity/META-INF/modules/login2/index.vm</b>
+		</h1>
+	</div> 
+#end
+
+#extends("layout.vm")

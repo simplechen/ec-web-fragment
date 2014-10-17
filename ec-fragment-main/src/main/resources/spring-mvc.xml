@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 查找最新的schemaLocation 访问 http://www.springframework.org/schema/ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop   
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd   
+        http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
+        http://www.springframework.org/schema/context   
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd   
+        http://www.springframework.org/schema/mvc   
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd   
+        http://www.springframework.org/schema/tx   
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- 启用MVC注解 -->
+	<mvc:annotation-driven />
+
+	<!-- 指定Sping组件扫描的基本包路径 -->
+	<context:component-scan base-package="com.ecarinfo.main.controller" />
+
+	<bean name="velocityConfig"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="configLocation" value="classpath:velocity.properties" />
+		<property name="resourceLoaderPath" value="velocity/" />	
+	</bean>
+	
+	<bean name="negotiationViewResolver"
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" />
+		<!-- 设置为true以忽略对Accept Header的支持 -->
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="defaultContentType" value="text/html" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+			</map>
+		</property>
+		<!-- 用于开启 /userinfo/123?format=json 的支持 -->
+		<property name="favorParameter" value="false" />
+
+		<property name="viewResolvers">
+			<list>
+				<bean id="viewResolver"
+					class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+					<property name="order" value="2" />
+					<property name="contentType" value="text/html;charset=UTF-8" />
+					<property name="cache" value="true" /><!--是否缓存模板-->
+					<!-- <property name="prefix" value="/main/"/> -->
+					<property name="suffix" value=".vm"/>				
+					<property name="exposeSpringMacroHelpers" value="true" /><!--是否使用spring对宏定义的支持 -->
+					<property name="toolboxConfigLocation" value="WEB-INF/toolbox.xml" /><!--toolbox配置文件路径 -->
+					<property name="dateToolAttribute" value="date" /><!--日期函数名称 -->
+					<property name="numberToolAttribute" value="number" /><!--数字函数名称 -->										
+					<property name="exposeRequestAttributes" value="true" /><!--是否开放request属性 -->
+					<property name="requestContextAttribute" value="request" /><!--request属性引用名称 -->
+					<!-- <property name="layoutUrl" value="templates/layout/default.vm" /> --><!--指定layout文件 -->
+				</bean>
+			</list>
+		</property>
+
+		<property name="defaultViews">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+				<bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+					<property name="marshaller">
+						<bean class="org.springframework.oxm.xstream.XStreamMarshaller" />
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+</beans>  

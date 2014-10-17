@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<title>ec-fragment-project</title>
+	#block("head") 
+		默认HEAD内容
+	#end 
+</head>
+<body> 
+    <h1>欢迎${uname}回来</h1>
+	#block("body") 
+		默认BODY内容 
+	#end
+</body>
+</html>
